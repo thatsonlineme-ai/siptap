@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#eaf7ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SipTap">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="styles.css">
+<title>SipTap</title>
+</head>
+<body>
+<main class="app-shell">
+<header><p class="eyebrow">NFC HYDRATION</p><h1>SipTap</h1><p class="subhead">Tap the bottle. Watch the day fill up.</p></header>
+<section class="card summary-card">
+<div><p class="label">Today</p><p class="big-number"><span id="todayMl">0</span> <small>mL</small></p><p class="muted"><span id="todayLitres">0.0</span> L of <span id="goalLitres">2.5</span> L</p></div>
+<div class="bottle-wrap"><div class="bottle-neck"></div><div class="bottle"><div class="water" id="waterFill"></div><div class="shine"></div><div class="bottle-label"><span id="percentText">0%</span></div></div></div>
+</section>
+<section class="card">
+<div class="section-heading"><div><p class="label">Choose bottle</p><h2>Log a refill</h2></div><button class="icon-button" id="settingsBtn">⚙️</button></div>
+<div id="bottleButtons" class="bottle-grid"></div>
+<button id="undoBtn" class="secondary full-width">Undo last</button>
+</section>
+<section class="card">
+<div class="section-heading"><div><p class="label">Today's taps</p><h2 id="tapCount">0 entries</h2></div><button id="resetBtn" class="danger-link">Reset day</button></div>
+<div id="history" class="history empty">No water logged yet.</div>
+</section>
+<section class="card mini-stats"><div><p class="label">7-day average</p><p class="stat" id="avg7">0.0 L</p></div><div><p class="label">Goal days</p><p class="stat" id="goalDays">0 / 7</p></div></section>
+</main>
+
+<dialog id="settingsDialog">
+<form method="dialog" class="settings-form">
+<div class="section-heading"><div><p class="label">Customize</p><h2>Settings</h2></div><button class="icon-button" value="cancel">✕</button></div>
+<label>Daily goal (mL)<input id="goalInput" type="number" min="250" step="50"></label>
+<fieldset><legend>Bottle 1</legend><label>Name<input id="b1Name" type="text"></label><label>Volume (mL)<input id="b1Ml" type="number" min="50" step="50"></label></fieldset>
+<fieldset><legend>Bottle 2</legend><label>Name<input id="b2Name" type="text"></label><label>Volume (mL)<input id="b2Ml" type="number" min="50" step="50"></label></fieldset>
+<button id="saveSettings" class="primary full-width" value="default">Save settings</button>
+</form>
+</dialog>
+<div id="toast" class="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
