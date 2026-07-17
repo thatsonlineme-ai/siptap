@@ -28,12 +28,12 @@ For each tag:
 
 ## NFC: direct logging
 The app accepts:
-`https://YOUR-SITE/?log=home&run=UNIQUE_VALUE`
-`https://YOUR-SITE/?log=travel&run=UNIQUE_VALUE`
+`https://YOUR-SITE/#log=home&run=UNIQUE_VALUE`
+`https://YOUR-SITE/#log=travel&run=UNIQUE_VALUE`
 
 In Shortcuts, use Current Date → Format Date → Text containing the URL with the formatted date as `run` → Open URLs. This ensures each NFC tap creates a fresh log.
 
 Use the `home` URL for the first bottle and the `travel` URL for the second bottle. The names and volumes can be changed inside SipTap settings without changing the NFC tag URLs.
 
 ## Privacy
-Data remains in local browser storage on that phone. Clearing Safari website data can erase it. No cloud sync or account is included.
+Data remains in local browser storage on that phone. Clearing Safari website data can erase it. No cloud sync or account is included. NFC logging uses the part of the URL after `#`, which is handled in the browser and is not sent to GitHub Pages as part of the page request.

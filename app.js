@@ -248,7 +248,10 @@ function saveSettings(event) {
 }
 
 function handleUrlLogging() {
-  const params = new URLSearchParams(location.search);
+  const hashParams = location.hash.startsWith("#")
+    ? location.hash.slice(1)
+    : location.hash;
+  const params = new URLSearchParams(hashParams || location.search);
   const bottleId = params.get("log");
   const runId = params.get("run");
 
