@@ -4,7 +4,7 @@ const defaults = {
   settings: {
     goalMl: 2500,
     bottles: [
-      { id: "home", name: "Home bottle", ml: 700 },
+      { id: "home", name: "Home bottle", ml: 500 },
       { id: "travel", name: "Travel bottle", ml: 500 },
     ],
   },
@@ -36,6 +36,7 @@ const dom = {
 };
 
 let state = loadState();
+migrateDefaultBottleVolumes();
 
 function cloneDefaults() {
   return structuredClone(defaults);
@@ -52,6 +53,19 @@ function loadState() {
 
 function saveState() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function migrateDefaultBottleVolumes() {
+  const homeBottle = state.settings?.bottles?.find((bottle) => bottle.id === "home");
+
+  if (!homeBottle) {
+    return;
+  }
+
+  if (homeBottle.name === "Home bottle" && Number(homeBottle.ml) === 700) {
+    homeBottle.ml = defaults.settings.bottles[0].ml;
+    saveState();
+  }
 }
 
 function dayKey(date = new Date()) {
