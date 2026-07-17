@@ -181,7 +181,9 @@ function renderHistory() {
         minute: "2-digit",
       });
 
-      return `<div class="history-row"><strong>${escapeHtml(entry.name)} - ${Number(entry.ml).toLocaleString()} mL</strong><span>${time}</span></div>`;
+      const sourceLabel = entry.source === "nfc" ? " · NFC" : "";
+
+      return `<div class="history-row"><strong>${escapeHtml(entry.name)} - ${Number(entry.ml).toLocaleString()} mL${sourceLabel}</strong><span>${time}</span></div>`;
     }).join("")
     : "No water logged yet.";
 }
@@ -267,20 +269,11 @@ function handleUrlLogging() {
     : location.hash;
   const params = new URLSearchParams(hashParams || location.search);
   const bottleId = params.get("log");
-  const runId = params.get("run");
 
-  if (!bottleId || !runId) {
+  if (!bottleId) {
     return;
   }
 
-  const sessionKey = `run-${runId}`;
-
-  if (sessionStorage.getItem(sessionKey)) {
-    history.replaceState({}, "", location.pathname);
-    return;
-  }
-
-  sessionStorage.setItem(sessionKey, "1");
   logBottle(bottleId, "nfc");
   history.replaceState({}, "", location.pathname);
 }
